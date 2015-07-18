@@ -89,20 +89,20 @@ local sumoUnitDefID = UnitDefNames["corsumo"].id
 local sumoUnitDefRange = UnitDefNames["corsumo"].maxWeaponRange -- 460 / 440
 
 local cullFromListIDs = {
-	[79] = true,
-	[81] = true,
-	[82] = true,
-	[87] = true,
-	[97] = true,
-	[99] = true,
-	[109] = true,
-	[110] = true,
-	[117] = true,
-	[270] = true,
-	[304] = true,
-	[305] = true,
-	[307] = true,
-	[334] = true,
+	[UnitDefNames["bomberassault"].id] = true,
+	[UnitDefNames["bomberlaser"].id] = true,
+	[UnitDefNames["bomberstrike"].id]= true,
+	[UnitDefNames["chicken_blimpy"].id] = true,
+	[UnitDefNames["chicken_pigeon"].id] = true,
+	[UnitDefNames["chicken_roc"].id] = true,
+	[UnitDefNames["chickenf"].id] = true,
+	[UnitDefNames["chickenflyerqueen"].id] = true,
+	[UnitDefNames["cobtransport"].id] = true,
+	[UnitDefNames["fakeunit_aatarget"].id] = true,
+	[UnitDefNames["fakeunit_los"].id] = true,
+	[UnitDefNames["nebula"].id] = true,
+	[UnitDefNames["fighterdrone"].id] = true,
+	[UnitDefNames["corshad"].id] = true,
 }
 
 local customRangeCategory = {
@@ -165,7 +165,7 @@ local cmdNewtonJuggle = {
 local function GetAircraftData()
 	for i = 1, #UnitDefs do
 		local ud = UnitDefs[i]
-		if ud.isAirUnit and not cullFromListIDs[i] then
+		if ud.isAirUnit then --and not cullFromListIDs[i] then
 			aircraftDefs[i] = ud
 			local optRange = customRangeCategory[i] or (ud.maxWeaponRange < newtonUnitDefRange and ud.maxWeaponRange or newtonUnitDefRange)
 			local basePrio = customPriorityCategory[i] or ud.metalCost
@@ -353,7 +353,7 @@ function widget:GameFrame(n)
 			if bestTarget then							
 				
 				local targetNeedsPush
-				Spring.Echo(targetsInRangeList[bestTarget].isPush and "true" or "false")
+				--Spring.Echo(targetsInRangeList[bestTarget].isPush and "true" or "false")
 				local currentTarget = nParams.currentTarget				
 				
 				if currentTarget and (currentTarget == bestTarget or 
